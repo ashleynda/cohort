@@ -5,13 +5,15 @@ import NotificationsNoneOutlined from '@mui/icons-material/NotificationsNoneOutl
 
 const MobileNav = () => {
   return (
-    <div className='md grid grid-cols-3 gap-44 items-center'>
-    <img src={logo} alt='company-logo' className='col-span-1' />
-    <div className='col-span-2 flex flex-row items-center justify-end md:justify-start'>
-      <NotificationsNoneOutlined />
-      <Avatar src="/broken-image.jpg" style={{color: '#008EEF'}} />
+    <div className='md grid grid-cols-3 items-center'>
+      <img src={logo} alt='company-logo' className='col-span-1' />
+
+      <div className='col-span-2 flex flex-row items-center justify-end md:justify-start'>
+        <NotificationsNoneOutlined />
+        <Avatar src="/broken-image.jpg" style={{color: '#008EEF'}} />
+      </div>
+      
     </div>
-  </div>
   
   )
 }

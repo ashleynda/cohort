@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
                 color: activeButton === 'Home' ? '#008EEF' : 'black',
                 '&:hover': {
                   backgroundColor: '#F6FCFF',
-                  color: '#008EEF',
+                  color: '#9CABB5',
                 },
                 fontSize: 16,
                 lineHeight: '27px',
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                 color: activeButton === 'Workspace' ? '#008EEF' : 'black',
                 '&:hover': {
                   backgroundColor: '#F6FCFF',
-                  color: '#008EEF',
+                  color: '#9CABB5',
                 },
                 fontSize: 16,
                 lineHeight: '27px',
@@ -72,7 +72,7 @@ const Footer: React.FC = () => {
                 color: activeButton === 'Resources' ? '#008EEF' : 'black',
                 '&:hover': {
                   backgroundColor: '#F6FCFF',
-                  color: '#008EEF',
+                  color: '#9CABB5',
                 },
                 fontSize: 16,
                 lineHeight: '27px',
@@ -95,7 +95,7 @@ const Footer: React.FC = () => {
                 color: activeButton === 'Schedule' ? '#008EEF' : 'black',
                 '&:hover': {
                   backgroundColor: '#F6FCFF',
-                  color: '#008EEF',
+                  color: '#9CABB5',
                 },
                 fontSize: 16,
                 lineHeight: '27px',
