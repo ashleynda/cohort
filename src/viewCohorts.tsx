@@ -26,49 +26,49 @@
 // export default viewCohorts;
 const viewCohorts = 
     [{
-        "CohortName": "Cohort 1",
-        "Program": "Java",
-        "Date": "15-Nov-2023"
+        "cohortName": "Cohort 1",
+        "program": "Product design",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 2",
-        "Program": "Frontend",
-        "Date": "20-Mar-2024"
+        "cohortName": "Cohort 2",
+        "program": "Techprenurship",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 3",
-        "Program": "Backend",
-        "Date": "01-Oct-2023"
+        "cohortName": "Cohort 3",
+        "program": "Creative Design",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 3",
-        "Program": "DevOps",
-        "Date": "12-Feb-2024"
+        "cohortName": "Cohort 3",
+        "program": "Dev-ops",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 4",
-        "Program": "Quality Assurance",
-        "Date": "05-Sep-2023"
+        "cohortName": "Cohort 4",
+        "program": "Ux Writer",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 5",
-        "Program": "Developers Associate",
-        "Date": "05-Feb-2024"
+        "cohortName": "Cohort 5",
+        "program": "Software Engineering",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 6",
-        "Program": "Developers Associate",
-        "Date": "05-Feb-2024"
+        "cohortName": "Cohort 6",
+        "program": "Developers Associate",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 7",
-        "Program": "Developers Associate",
-        "Date": "05-Feb-2024"
+        "cohortName": "Cohort 7",
+        "program": "Developers Associate",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 8",
-        "Program": "Developers Associate",
-        "Date": "05-Feb-2024"
+        "cohortName": "Cohort 8",
+        "program": "Developers Associate",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 9",
-        "Program": "Developers Associate",
-        "Date": "05-Feb-2024"
+        "cohortName": "Cohort 9",
+        "program": "Developers Associate",
+        "startDate": "02-Jan-2021"
       }, {
-        "CohortName": "Cohort 10",
-        "Program": "Developers Associate",
-        "Date": "05-Feb-2024"
+        "cohortName": "Cohort 10",
+        "program": "Developers Associate",
+        "startDate": "02-Jan-2021"
       }, 
     ]
 

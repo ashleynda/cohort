@@ -36,20 +36,19 @@ const Cohorts = () => {
         // pageLength > 0 ? (
             //     <InstructorCohort />
             // ) : (
-                <div className=' md:w-full h-4/5 relative'>
-            {!isMobile && ( // Render only if not on mobile
+        <div className=' flex flex-col p-5 justify-center md:w-full h-fit relative md:justify-between'>
+            {!isMobile && ( 
                 <p className='text-2xl flex font-semibold font-serif pt-8'>Cohorts</p>
             )}
             
-            <div className={isMobile ? 'flex flex-col justify-center items-center md':'flex flex-col justify-center items-center py-28 pr-32'}>
+            <div className={isMobile ? 'flex flex-col justify-center items-center p-6':'flex flex-col justify-center items-center py-28'}>
                 <img src={CloudSleep} alt=''/>
                 <Typography variant='h6' className={isMobile ? 'text-lg text-gray-900 font-bold': 'text-xl'}>
                     Empty Space
                 </Typography>
-                <Typography gutterBottom className='md:mr-2'>
-                    No cohort has been created yet, let’s get you started by<br/>
-                </Typography>
-                <Typography >
+                <Typography gutterBottom
+                    style={{display:'flex', justifyContent: 'center', paddingLeft: 5, paddingRight:5, textAlign: 'center', maxWidth: 450}}>
+                    No cohort has been created yet, let’s get you started by
                     clicking the button below.
                 </Typography>
                 <CreateCohort />
@@ -72,12 +71,11 @@ const Cohorts = () => {
                     <div className="modal-content">
                         <CreateCohort />
                     </div>
-                </Modal>  
-                {isMobile &&
-                <Footer/>
-                }
-                
+                </Modal> 
+                 
+                              
             </div>
+            
         </div>
         )
     // );

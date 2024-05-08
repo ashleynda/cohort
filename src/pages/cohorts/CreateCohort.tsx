@@ -85,7 +85,7 @@ const CreateCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileClear }
   };
 
   return (
-    <div className='hidden sm:flex justify-center pt-10'>
+    <div className='flex justify-center'>
       <React.Fragment>
         <Stack direction="row" spacing={1}>
           <div className='flex justify-center'>

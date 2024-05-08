@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
+import { BottomNavigation, Button } from '@mui/material';
 import { FiBriefcase } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -14,8 +14,8 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <div className="sm:hidden block mt-72">
-      <div className="flex flex-row justify-evenly">
+    <div className="sm:hidden block">
+      <div className="flex flex-row justify-evenly gap-4">
         <div>
           <Link to="/homepage">
             <Button
