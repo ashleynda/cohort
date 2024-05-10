@@ -20,10 +20,10 @@ const Hero = () => {
             <div className='md:absolute md:top-32 left-20 gap-10 z-5 p-5 md:p-0'>
                 <div className='flex flex-row items-center gap-2 z-5'>
                     <img src={company} alt='s' style={{zIndex: 5}} />
-                    <Typography variant='body1' className='text-white'>Semicolon Africa</Typography>
+                    <Typography variant='body1' className='text-white text-sm font-bold'>Semicolon Africa</Typography>
                 </div>
-                <Button variant='text' sx={{color: '#001343', textTransform: 'none', backgroundColor: 'white', 
-                    gap: '2px', fontSize: 12, textAlign: 'center', marginRight: '52px', marginTop: '10px'}}>
+                <Button variant='text' sx={{color: '#1E323F', textTransform: 'none', backgroundColor: 'white', 
+                    gap: '2px', fontSize: '16px', textAlign: 'center', marginRight: '52px', marginTop: '10px', fontWeight: 700}}>
                     View Profile <EastIcon />  
                 </Button>
             </div>

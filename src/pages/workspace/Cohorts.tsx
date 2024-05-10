@@ -4,14 +4,21 @@ import { useMediaQuery, useTheme } from "@mui/material";
 import CreateCohort from '../cohorts/CreateCohort';
 import CloudSleep from '../../assets/CloudSleep.png'
 import Footer from '../../components/footer/Footer';
+import { useDispatch } from 'react-redux';
 
+interface CreateCohortProps {
+    onFileUpload: (file: File) => void;
+    onFileClear: () => void;
+}
 
-const Cohorts = () => {
+const Cohorts: React.FC<CreateCohortProps> = ({ onFileUpload, onFileClear }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const dispatch = useDispatch();
+
     const [isModalOpen, setIsModalOpen] = useState('');
 
     const [isCreateCohortMobile, setIsCreateCohortMobile] = useState(false);
@@ -28,9 +35,8 @@ const Cohorts = () => {
             setIsCreateCohortMobile(false); // Render CreateCohort if web
             handleOpen(); // Open the modal
         }
-    };
-
-    
+    };  
+   
 
     return (
         // pageLength > 0 ? (
@@ -51,17 +57,7 @@ const Cohorts = () => {
                     No cohort has been created yet, let’s get you started by
                     clicking the button below.
                 </Typography>
-                <CreateCohort />
-                {/* <Button  
-                    variant="contained" 
-                    color="primary" 
-                    sx={{ textTransform: 'none' }} 
-                    className='text-base font-bold'
-                    onClick={handleCreateCohort}
-                    
-                >
-                    Create a Cohort
-                </Button> */}
+                <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear}/>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -69,7 +65,7 @@ const Cohorts = () => {
                     aria-describedby="modal-modal-description"
                 >
                     <div className="modal-content">
-                        <CreateCohort />
+                        <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear} />
                     </div>
                 </Modal> 
                  

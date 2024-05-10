@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Container, TextField, InputAdornment, Button, IconButton, MenuItem, Menu, Paper, useTheme, Typography, useMediaQuery } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Container, TextField, InputAdornment, Button, IconButton, MenuItem, Menu, Paper, useTheme, Typography, useMediaQuery, Card, Box } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -9,6 +9,11 @@ import simonLeeImage from '../../assets/simon-lee-J-Fr6LalosU-unsplash.jpg';
 import CreateCohort from '../cohorts/CreateCohort';
 import { getViewCohorts } from '../../features/cohort/viewSlice';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Stack from '@mui/joy/Stack';
+// import Autocomplete from '@mui/joy/Autocomplete';
 
 
 const ITEM_HEIGHT = 48;
@@ -34,14 +39,28 @@ interface Cohort {
   endDate: string;
   // Add other properties as needed
 }
+interface CreateCohortProps {
+  onFileUpload: (file: File) => void;
+  onFileClear: () => void;
+}
 
-const InstructorCohort = () => {
+const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileClear }) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const { viewCohorts, value, isLoading } = useSelector((store: any) => store.view);
   const dispatch = useDispatch();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [inputValue, setInputValue] = useState('');
+
+  // const handleChange = (event) => {
+  //   console.log('event------->',event.target.value); // Log the value to the console
+  // };
+
+  const handleInputChange = (event) => {
+    const newValue = event.target.value;
+    setInputValue(newValue);
+  };
  
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -86,43 +105,83 @@ const InstructorCohort = () => {
           </>
         )} */}
         <Container maxWidth={false} style={{ padding: '30px', display: 'flex', flexDirection: 'column' }}>
-          {/* {isMobile ? ( */}
             <p className=' hidden:md md:text-2xl flex font-semibold font-serif '>
               Cohorts
             </p>
-          {/* // )} */}
-            <div className='flex flex-row w-full justify-between items-center'>
-            {/* {isMobile ? ( */}
-              <Autocomplete
-                freeSolo
-                id="free-solo-2-demo"
-                disableClearable
-                options={moreActions.map((option) => option.title)}
+            <div className='flex flex-row w-full justify-between items-center mt-2'> 
+              <Stack spacing={1} sx={{ width: 438, height: '44px' }}>            
+               <FormControl id="free-solo-demo" >
+                <Autocomplete
                 renderInput={(params) => (
                   <TextField
                     {...params}
+                    variant="outlined"
                     InputProps={{
                       ...params.InputProps,
-                      type: 'search',
                       startAdornment: (
                         <InputAdornment position="start">
                           <SearchIcon />
                         </InputAdornment>
                       ),
                     }}
-                    placeholder="Search"
-                    sx={{ width: '400%', borderRadius: '8px' }}
+                    value={inputValue}
+                    onChange={handleInputChange}
                   />
                 )}
-              />
+                  placeholder="search"
+                  freeSolo
+                  disableClearable
+                  options={cohort.map((option) => option.title)}
+                />  
+                  </FormControl>
+              </Stack>  
+
+            {/* <Stack spacing={1} sx={{ width: 438, height: '44px' }}>            
+               <FormControl id="free-solo-2-demo" >
+                {/* <FormLabel>Search input</FormLabel> */}
+                {/* <Autocomplete
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      // Label="Search"
+                      variant="outlined"
+                      InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      value={inputValue}
+                      onChange={handleInputChange}
+                    />
+                  )}
+                    type="search"
+                    freeSolo
+                    disableClearable
+                    options={cohort.map((option) => option.title)}
+                  /> */}
+                  {/* type="search"
+                  freeSolo
+                  disableClearable
+                  options={cohort.map((option) => option.title)} */}
+                
+                  
+              
+              {/* </FormControl>
+            </Stack>  */}
+
               <div className='flex justify-between gap-2 items-center'>
-                <CreateCohort />               
+                <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear} />               
                 <Button 
                   variant='outlined' 
                   disableRipple 
                   endIcon={<MoreVertIcon onClick={handleClick}/>} 
                   sx={{ color: '#142E70'}} 
-                  style={{display: 'flex', padding:'5px', alignSelf: 'center'}} 
+                  style={{display: 'flex', padding:'5px', alignSelf: 'center', fontFamily: 'DM Sans', textTransform: 'none', color: '#142E70', fontSize: '14px', fontWeight: '700',
+                    border: '1.5px solid #AAB7DB', borderRadius: '8px',
+                  }} 
                 >More Actions</Button>
                 <Menu
                   id="long-menu"
@@ -145,7 +204,102 @@ const InstructorCohort = () => {
         {/* {!isMobile && ( */}
           <Container maxWidth={false} style={{ padding: '20px' }}>
             <div className='flex flex-col justify-start'>
-            {viewCohorts.map((item: Cohort, index: number) => {
+          
+
+              {viewCohorts?.filter((item:Cohort ) => inputValue === '' ? item : item.cohortName.toLowerCase().includes(inputValue.toLowerCase())).map((item: Cohort, index: number) => {
+                let startDate: Date | null = null;
+                let formattedStartDateString: string = "";
+              
+                if (typeof item.startDate === 'string' && item.startDate.includes('-')) {
+                  // If startDate is a string and in the format "YYYY-MM-DD"
+                  startDate = new Date(item.startDate);
+                  formattedStartDateString = `${startDate.getDate()}${getDaySuffix(startDate.getDate())} ${getMonthAbbreviation(startDate.getMonth())} ${startDate.getFullYear()}`;
+                } else {
+                  console.error("Invalid startDate:", item.startDate);
+                }
+              
+                if (!startDate) {
+                  console.error("Invalid startDate:", item.startDate);
+                }
+              
+                console.log("Parsed start date:", startDate);
+                console.log("Formatted start date:", formattedStartDateString);
+
+
+                
+                return (
+                  <Card key={item.id} style={{ marginBottom: '20px', padding: '10px', display: 'flex', alignItems: 'center', border: '1px #F6FCFF', boxShadow: '0px 8px 16px 0px rgba(240, 249, 255, 0.5)', borderRadius: '8px' }}>
+                    {/* <Box sx={{ display: 'flex', flexDirection: 'column' }}> */}
+                      <img src={simonLeeImage} alt="Simon Lee" className='w-12 h-12 rounded-lg'/>
+                      <div className='flex flex-col justify-center items-start px-4'>
+                        <Typography className='flex text-base font-sans font-bold' style={{color: '#1E323F', fontFamily: 'DM Sans', fontWeight: '700'}}>{item.cohortName}</Typography>
+                        <div className='flex gap-6 text-center justify-between '>
+                          <Typography className='flex' style={{fontFamily: 'DM Sans', color: '#1E323F', fontSize: '12px', fontWeight: '500', width: '150px'}}>{item.program}</Typography>  
+                          <div className='flex text-center items-center gap-2 w-fit '>
+                            <PersonOutlineOutlinedIcon style={{color: '#9CABB5', width: '12px' }}/> 
+                            <p className='text-gray-600 text-xs'>25 Learners</p>  
+                          </div>
+                        </div>
+                      </div>
+                      <div style={{ marginLeft: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> 
+                        <Typography style={{ textAlign: 'center', fontSize: 14, color: '#4F4F4F' }}>Created {formattedStartDateString}</Typography>
+                      </div> 
+                      <IconButton aria-label="more" className='flex gap-2'>
+                       <MoreVertIcon />
+                      </IconButton>
+
+                    {/* </Box> */}
+                    </Card>
+                  // <Paper key={item.id} elevation={1} style={{ marginBottom: '20px', padding: '10px', display: 'flex', alignItems: 'center', boxShadow: '1px'}}>
+                  //   <div style={{ flex: 1 }} className='flex'>
+                  //     <div>
+                  //       <img src={simonLeeImage} alt="Simon Lee" className='w-12'/>
+                  //     </div>
+                  //     <div className='flex flex-col justify-center items-start px-4'>
+                  //       <Typography className='flex text-base text-gray-900'>{item.cohortName}</Typography>
+                  //       <div className='flex gap-6 '>
+                  //         <Typography className='flex text-xs'>{item.program}</Typography>  
+                  //         <div className='flex text-center items-center gap-2'>
+                  //           <PersonOutlineOutlinedIcon style={{color: '#9CABB5', width: '12px' }}/> 
+                  //           <p className='text-gray-600 text-xs'>25 Learners</p>  
+                  //         </div>
+                  //       </div>
+                  //     </div>
+                  //     <div style={{ marginLeft: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> {/* Adjusted here */}
+                  //       <Typography style={{ textAlign: 'center', fontSize: 14, color: '#4F4F4F' }}>Created {formattedStartDateString}</Typography>
+                  //     </div>
+                  //   </div>
+                  //   <IconButton aria-label="more">
+                  //     <MoreVertIcon />
+                  //   </IconButton>
+                  // </Paper>
+                );
+              })}
+            </div> 
+          </Container>
+        {/* )}      */}
+      </div>
+    );
+  }; 
+  const cohort = [
+    { title: 'Cohort 1' },
+    { title: 'Cohort 2' },
+    { title: 'Cohort 3' },
+    { title: 'Cohort 4' },
+    { title: 'Cohort 5' },
+    { title: 'Cohort 6' },
+    { title: 'Cohort 7' },
+    { title: 'Cohort 8' },
+    { title: 'Cohort 9' },
+    { title: 'Cohort 10' },
+
+  ]
+  
+export default InstructorCohort;
+
+
+
+  {/* {viewCohorts.map((item: Cohort, index: number) => {
               let startDate: Date | null = null;
               let formattedStartDateString: string = "";
             
@@ -165,48 +319,29 @@ const InstructorCohort = () => {
               }
             
               console.log("Parsed start date:", startDate);
-              console.log("Formatted start date:", formattedStartDateString);    
+              console.log("Formatted start date:", formattedStartDateString);     */}
 
-                
-                return (
-                  <Paper key={item.id} elevation={3} style={{ marginBottom: '20px', padding: '10px', display: 'flex', alignItems: 'center'}}>
-                    <div style={{ flex: 1 }} className='flex'>
-                      <div>
-                        <img src={simonLeeImage} alt="Simon Lee" className='w-12'/>
-                      </div>
-                      <div className='flex flex-col justify-center items-start px-4'>
-                        <Typography className='flex text-base text-gray-900'>{item.cohortName}</Typography>
-                        <div className='flex gap-6 '>
-                          <Typography className='flex text-xs'>{item.program}</Typography>  
-                          <div className='flex text-center items-center gap-2'>
-                            <PersonOutlineOutlinedIcon style={{color: '#9CABB5', width: '12px' }}/> 
-                            <p className='text-gray-600 text-xs'>25 Learners</p>  
-                          </div>
-                        </div>
-                      </div>
-                      <div style={{ marginLeft: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> {/* Adjusted here */}
-                        <Typography style={{ textAlign: 'center', fontSize: 14, color: '#4F4F4F' }}>Created {formattedStartDateString}</Typography>
-                      </div>
-                    </div>
-                    <IconButton aria-label="more">
-                      <MoreVertIcon />
-                    </IconButton>
-                  </Paper>
-                );
-              })}
-            </div> 
-          </Container>
-        {/* )}      */}
-      </div>
-    );
-  }; 
+            {/* {viewCohorts.map((item: Cohort, index: number) => {
+              let startDate: Date | null = null;
+              let formattedStartDateString: string = "";
 
-  
-export default InstructorCohort;
+              if (typeof item.startDate === 'string' && item.startDate.includes('-')) {
+                // If startDate is a string and in the format "YYYY-MM-DD"
+                startDate = new Date(item.startDate);
+                formattedStartDateString = `${startDate.getDate()}${getDaySuffix(startDate.getDate())} ${getMonthAbbreviation(startDate.getMonth())} ${startDate.getFullYear()}`;
+              } else if (item.startDate instanceof Date) {
+                startDate = item.startDate;
+                formattedStartDateString = `${startDate.getDate()}${getDaySuffix(startDate.getDate())} ${getMonthAbbreviation(startDate.getMonth())} ${startDate.getFullYear()}`;
+              } else {
+                console.error("Invalid startDate:", item.startDate);
+              }
 
+              if (!startDate) {
+                console.error("Invalid startDate:", item.startDate);
+              }
 
-
-
+              console.log("Parsed start date:", startDate);
+              console.log("Formatted start date:", formattedStartDateString); */}
 
 
 
@@ -283,3 +418,24 @@ export default InstructorCohort;
             </Paper>  */}
           {/* ))} */}
         {/* </div>  */}
+
+
+
+
+          {/* <Autocomplete
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Search"
+                    variant="outlined"
+                    InputProps={{
+                      // ...params.InputProps,
+                      // startAdornment: (
+                        <InputAdornment position="start">
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                )}
+              /> */}

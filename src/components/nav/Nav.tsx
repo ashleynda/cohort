@@ -67,30 +67,29 @@ const Nav = () => {
             variant="text" 
             sx={{ 
               color: activeButton === 0 ? '#008EEF' : 'black', 
-              textDecoration: activeButton === 0 ? 'underline' : 'none',
+              borderBottom: activeButton === 0 ? '4px solid #008EEF' : 'none',
               textTransform: 'none',
-              '&:hover': { 
-                textDecoration: 'underline',
+              '&:hover': {                 
                 color: '#008EEF'
               },
               fontSize: 16,
               fontWeight: 600,
-              lineHeight: '27px' 
+              lineHeight: '27px', 
+              borderRadius: 1
             }}
               onClick={() => handleClick(0)}  
               className="text-base font-bold"
             >
-              Home
+            Home
           </Button>
 
           <Button 
             variant="text" 
             sx={{ 
               color: activeButton === 1 ? '#008EEF' : 'black', 
-              textDecoration: activeButton === 1 ? 'underline' : 'none',
+              borderBottom: activeButton === 1 ? '4px solid #008EEF' : 'none',
               textTransform: 'none',
               '&:hover': { 
-                textDecoration: 'underline',
                 color: '#008EEF'
               },
               fontSize: 16,
@@ -107,10 +106,9 @@ const Nav = () => {
             variant="text" 
             sx={{ 
               color: activeButton === 2 ? '#008EEF' : 'black', 
-              textDecoration: activeButton === 2 ? 'underline' : 'none',
+              borderBottom: activeButton === 2 ? '4px solid #008EEF' : 'none',
               textTransform: 'none',
               '&:hover': { 
-              textDecoration: 'underline',
               color: '#008EEF'
               },
               fontSize: 16,

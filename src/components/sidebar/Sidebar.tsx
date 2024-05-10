@@ -99,7 +99,7 @@ const Sidebar = () => {
     
     return (
         <div className='w-[300px] h-4/5 relative '>
-            <div className='flex flex-col pt-6'>
+            <div className='flex flex-col pt-6 gap-4 items-align '>
                 {isMobile ? (
                     <Button
                         id="menu-button"
@@ -111,6 +111,8 @@ const Sidebar = () => {
                             color: '#008EEF',
                             fontSize: 16,
                             lineHeight: '27px',
+                            fontFamily: 'DM Sans',
+                            fontWeight: '700',
                         }}
                     >
                         {/* Menu */}
@@ -128,6 +130,9 @@ const Sidebar = () => {
                                 },
                                 fontSize: 16,
                                 lineHeight: '27px',
+                                fontFamily: 'DM Sans',
+                                fontWeight: '700',
+                                
                             }}
                             onClick={() => handleClick(0)}
                             startIcon={<GroupIcon />}
@@ -145,6 +150,9 @@ const Sidebar = () => {
                                 },
                                 fontSize: 16,
                                 lineHeight: '27px',
+                                fontFamily: 'DM Sans',
+                                fontWeight: '700',
+                                paddingLeft: '18px',
                             }}
                             onClick={() => handleClick(1)}
                             startIcon={<ImportContactsTwoToneIcon />}
@@ -162,6 +170,9 @@ const Sidebar = () => {
                                 },
                                 fontSize: 16,
                                 lineHeight: '27px',
+                                fontFamily: 'DM Sans',
+                                fontWeight: '700',
+                                paddingLeft: '18px',
                             }}
                             onClick={() => handleClick(2)}
                             startIcon={<FiBriefcase />}
@@ -180,6 +191,9 @@ const Sidebar = () => {
                                 },
                                 fontSize: 16,
                                 lineHeight: '27px',
+                                fontFamily: 'DM Sans',
+                                fontWeight: '700',
+                                paddingRight: '18px',
                             }}
                             onClick={() => handleClick(3)} 
                             startIcon={<PersonIcon />}

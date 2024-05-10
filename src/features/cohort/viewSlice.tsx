@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ViewAllCohortUrl } from "../../urls/UrlsApi";
 import viewCohorts from "../../viewCohorts";
 
@@ -20,7 +20,7 @@ interface Cohort {
   // const cohort:Cohort[] = []
 
 const initialState = { 
-    viewCohorts: viewCohorts, 
+    viewCohorts: [], 
     value: 4,
     isLoading: true,
 };
@@ -30,13 +30,17 @@ const initialState = {
 const viewSlice = createSlice({
     name: 'view',
     initialState,
-    reducers: {},
+    reducers: {
+      addCohort(state, action: PayloadAction<Cohort>) {
+        state.viewCohorts.push(action.payload);
+      }
+    },
  
 
 });
 
 // export const {incrementValue} = viewCohort.actions;
-
+export const { addCohort } = viewSlice.actions;
 export default viewSlice.reducer;
 
 
