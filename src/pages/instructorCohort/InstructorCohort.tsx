@@ -5,18 +5,24 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDispatch, useSelector } from 'react-redux';
 import simonLeeImage from '../../assets/simon-lee-J-Fr6LalosU-unsplash.jpg';
-
 import CreateCohort from '../cohorts/CreateCohort';
-import { getViewCohorts } from '../../features/cohort/viewSlice';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Stack from '@mui/joy/Stack';
+import { createCohort } from '../../features/cohort/CohortSlice';
 // import Autocomplete from '@mui/joy/Autocomplete';
 
 
 const ITEM_HEIGHT = 48;
+
+const action = [
+  {title: 'Delete'},
+  { title: 'Schedule an event' },
+  { title: 'Make an announcement' },
+
+]
 
 const moreActions = [
   { title: 'Publish a poll' },
@@ -42,6 +48,7 @@ interface Cohort {
 interface CreateCohortProps {
   onFileUpload: (file: File) => void;
   onFileClear: () => void;
+  onCreateCohort: () => void;
 }
 
 const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileClear }) => {
@@ -52,6 +59,14 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
   const dispatch = useDispatch();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [inputValue, setInputValue] = useState('');
+  const formData = useSelector((state: any) => state.cohort.cohortData || { 
+    cohortName: '', 
+    description: '',
+    program: '',
+    startDate: null,
+    endDate: null,
+    files: [],
+  });
 
   // const handleChange = (event) => {
   //   console.log('event------->',event.target.value); // Log the value to the console
@@ -91,7 +106,12 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
     return monthNames[month];
-  }
+  };
+
+   const handleCreateCohort = () => {
+    // Dispatch the create cohort action with form data
+    dispatch(createCohort(formData));
+  };
   
   
 
@@ -136,44 +156,8 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                   </FormControl>
               </Stack>  
 
-            {/* <Stack spacing={1} sx={{ width: 438, height: '44px' }}>            
-               <FormControl id="free-solo-2-demo" >
-                {/* <FormLabel>Search input</FormLabel> */}
-                {/* <Autocomplete
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      // Label="Search"
-                      variant="outlined"
-                      InputProps={{
-                        ...params.InputProps,
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <SearchIcon />
-                          </InputAdornment>
-                        ),
-                      }}
-                      value={inputValue}
-                      onChange={handleInputChange}
-                    />
-                  )}
-                    type="search"
-                    freeSolo
-                    disableClearable
-                    options={cohort.map((option) => option.title)}
-                  /> */}
-                  {/* type="search"
-                  freeSolo
-                  disableClearable
-                  options={cohort.map((option) => option.title)} */}
-                
-                  
-              
-              {/* </FormControl>
-            </Stack>  */}
-
               <div className='flex justify-between gap-2 items-center'>
-                <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear} />               
+                <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear} onCreateCohort={handleCreateCohort} />               
                 <Button 
                   variant='outlined' 
                   disableRipple 
@@ -189,7 +173,7 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                   anchorEl={anchorEl}
                   open={open}
                   onClose={handleClose}
-                  PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: '22ch' } }}
+                  // PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: '22ch' }}}
                 >
                   {moreActions.map((option) => (
                     <MenuItem key={option.title} selected={option.title === 'Pyxis'} onClick={handleClose}>
@@ -224,8 +208,6 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
               
                 console.log("Parsed start date:", startDate);
                 console.log("Formatted start date:", formattedStartDateString);
-
-
                 
                 return (
                   <Card key={item.id} style={{ marginBottom: '20px', padding: '10px', display: 'flex', alignItems: 'center', border: '1px #F6FCFF', boxShadow: '0px 8px 16px 0px rgba(240, 249, 255, 0.5)', borderRadius: '8px' }}>
@@ -246,6 +228,20 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                       </div> 
                       <IconButton aria-label="more" className='flex gap-2'>
                        <MoreVertIcon />
+                       {/* <Menu
+                        id="long-menu"
+                        MenuListProps={{ 'aria-labelledby': 'long-button' }}
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={handleClose}
+                        PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: '22ch' } }}
+                      >
+                        {moreActions.map((option) => (
+                          <MenuItem key={option.title} selected={option.title === 'Pyxis'} onClick={handleClose}>
+                            {option.title}
+                          </MenuItem>
+                        ))}
+                      </Menu> */}
                       </IconButton>
 
                     {/* </Box> */}

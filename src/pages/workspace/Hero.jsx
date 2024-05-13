@@ -22,8 +22,10 @@ const Hero = () => {
                     <img src={company} alt='s' style={{zIndex: 5}} />
                     <Typography variant='body1' className='text-white text-sm font-bold'>Semicolon Africa</Typography>
                 </div>
-                <Button variant='text' sx={{color: '#1E323F', textTransform: 'none', backgroundColor: 'white', 
-                    gap: '2px', fontSize: '16px', textAlign: 'center', marginRight: '52px', marginTop: '10px', fontWeight: 700}}>
+                <Button variant='contained' sx={{color: '#1E323F', textTransform: 'none', backgroundColor: 'white', 
+                    gap: '2px', fontSize: '16px', textAlign: 'center', marginRight: '52px', marginTop: '10px', fontWeight: 700,  '&:hover': {
+                        backgroundColor: 'white', // Remove hover effect
+                      },}}>
                     View Profile <EastIcon />  
                 </Button>
             </div>

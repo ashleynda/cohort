@@ -40,7 +40,7 @@
 
 // export default Layout;
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './sidebar/Sidebar';
 import Nav from './nav/Nav';
@@ -53,16 +53,26 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useSelector } from 'react-redux'; // Import useSelector hook to access Redux state
 import { getViewCohorts } from '../features/cohort/viewSlice';
 import viewCohorts from '../viewCohorts';
+import { truncate } from 'fs/promises';
+
+
+export let showCohort: boolean, setShowCohort: (value: boolean) => void;
 
 const Layout = () => {
+  [showCohort, setShowCohort] = useState(true);
+
+  useEffect(() => {
+    console.log('showCohort', showCohort);
+  }, [showCohort]); // Include showCohort in the dependency array
+
   const cohortCount = useSelector((state) => state.cohort.cohortCount);
 
   return (
     <div className='flex flex-col gap-24 md:flex-row w-full items-start'>
       <Sidebar />
-      {cohortCount === 0? <Cohorts /> : <InstructorCohort />} {/* Conditional rendering of InstructorCohort */}
+      {showCohort ? (cohortCount === 0 ? <Cohorts /> : <InstructorCohort />) : null}
     </div>
   );
 };
 
-export default Layout;
+export default Layout; // Export the component as default

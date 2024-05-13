@@ -57,7 +57,7 @@ const Cohorts: React.FC<CreateCohortProps> = ({ onFileUpload, onFileClear }) => 
                     No cohort has been created yet, let’s get you started by
                     clicking the button below.
                 </Typography>
-                <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear}/>
+                <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear} onCreateCohort={handleCreateCohort}/>
                 <Modal
                     open={open}
                     onClose={handleClose}
@@ -65,7 +65,7 @@ const Cohorts: React.FC<CreateCohortProps> = ({ onFileUpload, onFileClear }) => 
                     aria-describedby="modal-modal-description"
                 >
                     <div className="modal-content">
-                        <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear} />
+                        <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear}  onCreateCohort={handleCreateCohort}/>
                     </div>
                 </Modal> 
                  

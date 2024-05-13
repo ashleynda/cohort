@@ -75,7 +75,8 @@ const Nav = () => {
               fontSize: 16,
               fontWeight: 600,
               lineHeight: '27px', 
-              borderRadius: 1
+              borderRadius: 1,
+              fontFamily: 'DM Sans'
             }}
               onClick={() => handleClick(0)}  
               className="text-base font-bold"
@@ -94,7 +95,8 @@ const Nav = () => {
               },
               fontSize: 16,
               fontWeight: 600,
-              lineHeight: '27px' 
+              lineHeight: '27px',
+              fontFamily: 'DM Sans' 
             }}
               onClick={() => handleClick(1)}  
               className="text-base font-bold"
@@ -113,7 +115,8 @@ const Nav = () => {
               },
               fontSize: 16,
               fontWeight: 600,
-              lineHeight: '27px'
+              lineHeight: '27px',
+              fontFamily: 'DM Sans'
             }}
               onClick={() => handleClick(2)}  
               className="text-base font-bold"

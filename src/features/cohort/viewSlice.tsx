@@ -17,11 +17,47 @@ interface Cohort {
   // Add other properties as needed
 }
 
-  // const cohort:Cohort[] = []
+  // const cohortData = [
+//   {
+//     cohortName: '',
+//     description: '',
+//     program: '',
+//     startDate: null,
+//     endDate: null,
+//     files: [],
+//     cohortCount: 0,
+//   },
+//   {
+//     cohortName: '',
+//     description: '',
+//     program: '',
+//     startDate: null,
+//     endDate: null,
+//     files: [],
+//     cohortCount: 0,
+//   },
+//   {
+//     cohortName: '',
+//     description: '',
+//     program: '',
+//     startDate: null,
+//     endDate: null,
+//     files: [],
+//     cohortCount: 0,
+//   },
+// ];
+
+// const initialState = {cohortData}
+
+interface ViewState {
+  viewCohorts: Cohort[];
+  value: number;
+  isLoading: boolean;
+}
 
 const initialState = { 
-    viewCohorts: [], 
-    value: 4,
+    viewCohorts: viewCohorts, 
+    value: 0,
     isLoading: true,
 };
 

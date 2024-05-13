@@ -9,6 +9,7 @@ import { Theme } from '@mui/material/styles'; // Add Theme import
 import { SelectChangeEvent } from '@mui/material';
 import Mobileoption from '../mobile/MobileOption';
 import { useNavigate } from 'react-router-dom';
+import { setShowCohort } from '../WorkspaceLayout';
 
 
 
@@ -23,23 +24,33 @@ const Sidebar = () => {
 
     const handleClick = (index: number) => {
         setActiveButton(index);
-        switch(index) {
-          case 0:
-            navigate('/cohorts');
-            break;
-          case 1:
-            navigate('/programs');
-            break;
-          case 2:
-            navigate('/instructors');
-            break;
-          case 3:
-            navigate('/learners');
-            break;
-          default:
-            break;
+        switch (index) {
+            case 0:
+                // Perform the action for cohorts
+                console.log("Navigate to cohorts");
+                setShowCohort(true);
+                break;
+            case 1:
+                // Perform the action for programs
+                console.log("Navigate to programs");
+                setShowCohort(false);
+                
+                break;
+            case 2:
+                // Perform the action for instructors
+                console.log("Navigate to instructors");
+                setShowCohort(false);
+                break;
+            case 3:
+                // Perform the action for learners
+                console.log("Navigate to learners");
+                setShowCohort(false);
+                break;
+            default:
+                break;
         }
-      };    
+    };
+     
        
 
     const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {

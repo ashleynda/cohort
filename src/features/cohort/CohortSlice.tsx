@@ -168,7 +168,7 @@ interface CohortState {
 }
 
 const initialState: CohortState = {
-  cohortData: {
+  cohortData:   {
     cohortName: '',
     description: '',
     program: '',
@@ -178,6 +178,38 @@ const initialState: CohortState = {
     cohortCount: 0,
   },
 };
+// const cohortData = [
+//   {
+//     cohortName: '',
+//     description: '',
+//     program: '',
+//     startDate: null,
+//     endDate: null,
+//     files: [],
+//     cohortCount: 0,
+//   },
+//   {
+//     cohortName: '',
+//     description: '',
+//     program: '',
+//     startDate: null,
+//     endDate: null,
+//     files: [],
+//     cohortCount: 0,
+//   },
+//   {
+//     cohortName: '',
+//     description: '',
+//     program: '',
+//     startDate: null,
+//     endDate: null,
+//     files: [],
+//     cohortCount: 0,
+//   },
+// ];
+
+// const initialState = {cohortData}
+
 
 const cohortSlice = createSlice({
   name: 'cohort',
@@ -187,7 +219,8 @@ const cohortSlice = createSlice({
       state.cohortData = { ...state.cohortData, ...action.payload };
     },
     addFile(state, action: PayloadAction<File>) {
-      state.cohortData.files.push(action.payload); // Add the uploaded file to the files array in the state
+      state.cohortData.files.push(action.payload); 
+      // Add the uploaded file to the files array in the state
     },
     
     clearFiles(state) {
@@ -214,6 +247,8 @@ const cohortSlice = createSlice({
         state.cohortData.files = [];
         // Increment cohort count
         state.cohortData.cohortCount += 1;
+        
+        
       } else {
         // Handle if any required field is missing
         console.error('Some required fields are missing');
