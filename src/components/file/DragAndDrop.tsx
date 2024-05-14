@@ -207,7 +207,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ onFileUpload, onFileClear }) 
   
   return (
     <div
-      className='flex flex-col items-center justify-center bg-blue-100 border-dotted border-2 border-blue-400 p-4 rounded-lg h-[119px]'
+      className='flex flex-col items-center justify-center border-dotted border-2  p-4 rounded-lg h-[119px]'
       onDrop={handleDrop}
       onDragOver={(e) => e.preventDefault()}
       style={{ position: 'relative' }}
@@ -232,7 +232,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({ onFileUpload, onFileClear }) 
         </div>
       ) : (
         <p style={{fontSize: '12px', fontWeight: '500', fontFamily: 'DM Sans', color: '#2B1C1C', textAlign: 'center'}}>
-          Drag and drop or
+          Drag and drop or 
           <label
             htmlFor="fileInput"
             style={{ cursor: 'pointer', fontSize: '12px', fontWeight: '500', fontFamily: 'DM Sans', color: '#1C8AEC' }}

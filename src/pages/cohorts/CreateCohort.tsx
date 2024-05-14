@@ -115,7 +115,8 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
       formData.description?.trim() !== '' &&
       formData.program?.trim() !== '' &&
       formData.startDate &&
-      formData.endDate
+      formData.endDate &&
+      formData.files.length > 0
     );
   };
 
@@ -239,7 +240,7 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
               </div>
               <div>
                 <Typography className='pt-10 text-sm font-normal' style={{color: '#1E323F', fontSize: '14px', fontWeight: '400', fontFamily: 'DM Sans'}}>Add a cohort Avatar</Typography>
-                  <div className='flex flex-col items-center justify-center bg-blue-100 border-dotted border-2 border-blue-400 p-4 rounded-lg h-[119px]'>
+                  <div className='flex flex-col items-center justify-center bg-blue-100 border-dotted border-2 border-blue-400 p-8 rounded-lg h-[160px]'>
                     <FileUploadOutlinedIcon />
                     <DragAndDrop
                       onFileUpload={handleLocalFileUpload} 
