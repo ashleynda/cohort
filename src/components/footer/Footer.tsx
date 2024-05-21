@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
 
   return (
     <div className="sm:hidden block">
-      <div className="flex flex-row justify-evenly gap-4">
+      <div className="flex flex-row justify-evenly gap-4" style={{ boxShadow: '-1px -4px 8px 0px #008EEF14', width: 'fit'}}>
         <div>
           <Link to="/homepage">
             <Button

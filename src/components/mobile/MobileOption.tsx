@@ -21,12 +21,12 @@ const Mobileoption: React.FC = () => {
       <p className="justify-start flex">Switch between tabs</p>
       <Box sx={{ minWidth: 300 }}>
         <FormControl fullWidth >
-          <InputLabel id="demo-simple-select-label">Switch</InputLabel>
+          <InputLabel id="demo-simple-select-label">Cohorts</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={age}
-            label="Age"
+            // label="Age"
             onChange={handleChange}
             sx={{
               '& .MuiMenuItem-root': {

@@ -99,6 +99,7 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => { 
    e.preventDefault();
    if (isFormFilled()) { 
+    console.log("FormData before submission:", formData);
     dispatch(createCohort(formData)); 
     dispatch(addCohort(formData));
     onCreateCohort();
@@ -122,10 +123,12 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
 
   const handleStartDateChange = (date: Date) => { 
     dispatch(updateStartDate(new Date(date)));
+    console.log("FormData after start date change:", { ...formData, startDate: new Date(date) });
   };
 
   const handleEndDateChange = (date: Date) => { 
     dispatch(updateEndDate(new Date(date)));
+    console.log("FormData after end date change:", { ...formData, endDate: new Date(date) });
   };
 
   const handleCancel = () => {
@@ -145,11 +148,12 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
     <div>
       <Button onClick={handleOpen} 
        sx={{backgroundColor: "#008EEF", color: 'white', lineHeight: '27px', 
-       textTransform: 'none', 
+       textTransform: 'none',
        '&:hover': { // Overriding hover styles
         backgroundColor: "#008EEF", // Keeping the same background color as normal state
       }
-       }}
+    }}
+      // className="w-full md:w-auto"
       //  style={styles.button}
        disableRipple
       >Create a cohort</Button>
