@@ -161,16 +161,17 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                 </Stack>  
               </div>
 
-              <div className='flex justify-between gap-2 items-center'>
+              <div className='flex justify-between gap-6 w-[350px] md:w-auto items-center'>
                 <CreateCohort onFileUpload={onFileUpload} onFileClear={onFileClear} onCreateCohort={handleCreateCohort} />
                 <Button 
                   variant='outlined' 
                   disableRipple 
                   endIcon={<MoreVertIcon onClick={handleClick}/>} 
                   sx={{ color: '#142E70'}} 
-                  style={{display: 'flex', padding:'5px', alignSelf: 'center', fontFamily: 'DM Sans', textTransform: 'none', color: '#142E70', fontSize: '14px', fontWeight: '700',
+                  style={{display: 'flex', padding:'12px 12px 12px 19px', alignSelf: 'center', fontFamily: 'DM Sans', textTransform: 'none', color: '#142E70', fontSize: '14px', fontWeight: '700',
                     border: '1.5px solid #AAB7DB', borderRadius: '8px',
-                  }} className='w-[100%] md:w-auto h-[48px] md:h-auto'
+                  }} 
+                  // className='w-[100%] md:w-auto h-[48px] md:h-auto'
                 >More Actions</Button>
                 <Menu
                   id="long-menu"
@@ -264,7 +265,7 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                       </div>
                       <IconButton aria-label="more" className='flex h-fit md:h-auto '>
                        <MoreVertIcon className= 'h-fit'/>
-                       {/* <Menu
+                       <Menu
                         id="long-menu"
                         MenuListProps={{ 'aria-labelledby': 'long-button' }}
                         anchorEl={anchorEl}
@@ -277,7 +278,7 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                             {option.title}
                           </MenuItem>
                         ))}
-                      </Menu> */}
+                      </Menu>
                       </IconButton>
 
                     {/* </Box> */}
