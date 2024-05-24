@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Typography, Modal } from '@mui/material';
+import { Typography, Modal } from '@mui/material';
 import { useMediaQuery, useTheme } from "@mui/material";
 import CreateCohort from '../cohorts/CreateCohort';
 import CloudSleep from '../../assets/CloudSleep.png'
-import Footer from '../../components/footer/Footer';
 import { useDispatch } from 'react-redux';
 
 interface CreateCohortProps {
@@ -29,19 +28,16 @@ const Cohorts: React.FC<CreateCohortProps> = ({ onFileUpload, onFileClear }) => 
 
     const handleCreateCohort = () => {
         if (isMobile) {
-            setIsCreateCohortMobile(true); // Render CreateCohortMobile if mobile
-            handleOpen(); // Open the modal
+            setIsCreateCohortMobile(true); 
+            handleOpen(); 
         } else {
-            setIsCreateCohortMobile(false); // Render CreateCohort if web
-            handleOpen(); // Open the modal
+            setIsCreateCohortMobile(false); 
+            handleOpen(); 
         }
     };  
    
 
     return (
-        // pageLength > 0 ? (
-            //     <InstructorCohort />
-            // ) : (
         <div className=' flex flex-col p-5 justify-center md:w-full h-fit relative md:justify-between'>
             {!isMobile && ( 
                 <p className='text-2xl flex font-semibold font-serif pt-8'>Cohorts</p>
@@ -74,7 +70,6 @@ const Cohorts: React.FC<CreateCohortProps> = ({ onFileUpload, onFileClear }) => 
             
         </div>
         )
-    // );
 };
 
 export default Cohorts;

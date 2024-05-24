@@ -19,8 +19,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-
-
  interface CreateCohortProps { 
    onFileUpload: (file: File) => void;
    onFileClear: () => void;
@@ -122,38 +120,75 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
     );
   };
 
-  const handleStartDateChange = (date: Date) => { 
-    dispatch(updateStartDate(new Date(date)));
-    console.log("FormData after start date change:", { ...formData, startDate: new Date(date) });
-  };
-
-  const handleEndDateChange = (date: Date) => { 
-    dispatch(updateEndDate(new Date(date)));
-    console.log("FormData after end date change:", { ...formData, endDate: new Date(date) });
-  };
-
-  // const handleStartDateChange = (date: Dayjs | null) => {
-  //   setStartDate(date);
-  //   if (endDate && date && date.isAfter(endDate)) {
-  //     setEndDate(null);
-  //   }
-  //   setEndDateError("");
-  //   dispatch(updateCohortData({ ...formData, startDate: date?.toDate() || null }));
+  // const handleStartDateChange = (date: Date) => { 
+  //   dispatch(updateStartDate(new Date(date)));
+  //   console.log("FormData after start date change:", { ...formData, startDate: new Date(date) });
   // };
 
-  // const handleEndDateChange = (date: Dayjs | null) => {
-  //   if (startDate && date && date.isBefore(startDate)) {
-  //     setEndDateError("End date cannot be earlier than start date");
+  // const handleStartDateChange = (date: Dayjs | null, _context: PickerChangeHandlerContext<DateValidationError>) => { 
+  //   if (date !== null) {
+  //     const dateAsDate = date.toDate();
+  //     dispatch(updateStartDate(dateAsDate));
+  //     console.log("FormData after start date change:", { ...formData, startDate: dateAsDate });
   //   } else {
-  //     setEndDate(date);
-  //     setEndDateError("");
-  //     dispatch(updateCohortData({ ...formData, endDate: date?.toDate() || null }));
+    
+  //     dispatch(updateStartDate(null));
+  //     console.log("FormData after start date change:", { ...formData, startDate: null });
+  //   }
+  // };
+  
+
+  // const handleEndDateChange = (date: Date) => { 
+  //   dispatch(updateEndDate(new Date(date)));
+  //   console.log("FormData after end date change:", { ...formData, endDate: new Date(date) });
+  // };
+
+  // const handleEndDateChange = (date: Dayjs | null, _context: PickerChangeHandlerContext) => { 
+  //   // Check if date is not null
+  //   if (date !== null) {
+  //     const dateAsDate = date.toDate();
+  //     dispatch(updateEndDate(dateAsDate));
+  //     console.log("FormData after end date change:", { ...formData, endDate: dateAsDate });
+  //   } else {
+     
+  //     dispatch(updateEndDate(null));
+  //     console.log("FormData after end date change:", { ...formData, endDate: null });
   //   }
   // };
 
+  const handleStartDateChange = (date: Dayjs | null) => { 
+    if (date !== null) {
+      const dateAsDate = date.toDate();
+      dispatch(updateStartDate(dateAsDate));
+      setStartDate(date);
+      if (endDate && date.isAfter(endDate)) {
+        setEndDate(null);
+        dispatch(updateEndDate(null));
+        setEndDateError("End date cannot be before start date");
+      } else {
+        setEndDateError("");
+      }
+    } else {
+      dispatch(updateStartDate(null));
+      setStartDate(null);
+    }
+  };
 
-
-
+  const handleEndDateChange = (date: Dayjs | null) => { 
+    if (date !== null) {
+      if (startDate && date.isBefore(startDate)) {
+        setEndDateError("End date cannot be before start date");
+      } else {
+        const dateAsDate = date.toDate();
+        dispatch(updateEndDate(dateAsDate));
+        setEndDate(date);
+        setEndDateError("");
+      }
+    } else {
+      dispatch(updateEndDate(null));
+      setEndDate(null);
+    }
+  };
 
 
   const handleCancel = () => {
@@ -167,10 +202,6 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
       files: [],
     }));
   };
-  
-
-  
-  
 
  
 
@@ -179,12 +210,10 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
       <Button onClick={handleOpen} 
        sx={{backgroundColor: "#008EEF", color: 'white', lineHeight: '24px', fontSize: '14px',
        textTransform: 'none',borderRadius: '8px', padding: '12px 24px',
-       '&:hover': { // Overriding hover styles
-        backgroundColor: "#008EEF", // Keeping the same background color as normal state
+       '&:hover': { 
+        backgroundColor: "#008EEF", 
       }
     }}
-      // className="w-full md:w-auto"
-      //  style={styles.button}
        disableRipple
       >Create a cohort</Button>
       <Modal
@@ -228,8 +257,7 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
               value={formData.description} 
               onChange={(e:any) => handleInputChange(e)}   
               multiline       
-              // style={{border: '1px solid #D0DCE4', borderRadius: '6px'}}
-              rows={6}   // Set the number of visible text rows
+              rows={6}  
               style={{border: '1px solid #D0DCE4', borderRadius: '6px', overflowY: 'auto'}} 
             />
             <FormLabel htmlFor="textarea" className='pt-10 text-sm font-normal' sx={{borderRadius: '6px', height: '4.4%', color: '#1E323F', fontSize: '14px', fontWeight: '400', fontFamily: 'DM Sans'}}>Program</FormLabel>
@@ -256,7 +284,6 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
                   <DemoContainer components={['DatePicker']} sx={{borderRadius: '6px'}}>
                     <DatePicker label="25-Jan-2021" 
                       onChange={handleStartDateChange}
-                      // sx={{width: '37%', height: '44%', fontSize: '14px', fontWeight: '400', fontFamily: 'DM Sans', border: '1px solid #D0DCE4'}}
                     />
                   </DemoContainer>
                 </div>
@@ -265,9 +292,11 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
                   <DemoContainer components={['DatePicker']} sx={{borderRadius: '6px'}}>
                     <DatePicker label="25-Jan-2021" 
                       onChange={handleEndDateChange}
-                      // sx={{width: '37%', height: '44%', fontSize: '14px', fontWeight: '400', fontFamily: 'DM Sans', border: '1px solid #D0DCE4'}}                    
                     />
                   </DemoContainer>
+                      {endDateError && (
+                        <Typography color="error" variant="body2">{endDateError}</Typography>
+                      )}
                 </div>
                 </LocalizationProvider>                
               </div>
@@ -286,12 +315,12 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
                   <Typography className='flex justify-start' style={{color: '#475661', fontSize: '12px', fontWeight: '400', fontFamily: 'DM Sans'}}>you can do this later</Typography>
                 </div>
               <div className='flex justify-end gap-2'>
-                <Button variant='outlined' size='sm' sx={{color: '#008EEF', fontSize: '16px', borderRadius: '8px', fontFamily: 'DM Sans, sans-serif', textTransform: 'none' }} onClick={handleCancel} >Cancel</Button>              
-                <Button size='sm' sx={{backgroundColor: isFormFilled() ? '#008EEF' : '#D0DCE4', 
+                <Button variant='outlined' size='small' sx={{color: '#008EEF', fontSize: '16px', borderRadius: '8px', fontFamily: 'DM Sans, sans-serif', textTransform: 'none' }} onClick={handleCancel} >Cancel</Button>              
+                <Button size='small' sx={{backgroundColor: isFormFilled() ? '#008EEF' : '#D0DCE4', 
                 borderRadius: '8px', fontSize: '16px', color: 'white', fontFamily: 'DM Sans, sans-serif', 
                   textTransform: 'none',
                   '&:hover': {
-                    backgroundColor: isFormFilled() ? '#008EEF' : '#D0DCE4', // Keep the color consistent when hovered
+                    backgroundColor: isFormFilled() ? '#008EEF' : '#D0DCE4', 
                   }
                   }} type='submit' disableRipple disabled={!isFormFilled()} >Create Cohort</Button>
               </div>    

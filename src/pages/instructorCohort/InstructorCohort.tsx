@@ -68,12 +68,10 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
   });
 
   const mobileStyle = {
-    width: '100px', // Set width to 100% for mobile devices
+    width: '100px', 
   };
 
-  // const handleChange = (event) => {
-  //   console.log('event------->',event.target.value); // Log the value to the console
-  // };
+
 
   const handleInputChange = (event) => {
     const newValue = event.target.value;
@@ -112,7 +110,6 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
   };
 
    const handleCreateCohort = () => {
-    // Dispatch the create cohort action with form data
     dispatch(createCohort(formData));
   };
   
@@ -121,12 +118,6 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
   
     return (
       <div className='flex flex-col w-[100%]  '>
-        {/* {value < 1 && (
-          <>
-            {console.log("View Cohorts Length:", value || 0)}
-            <Cohorts />
-          </>
-        )} */}
         <Container maxWidth={false} style={{ padding: '30px', display: 'flex', flexDirection: 'column' }}>
             <p className=' hidden md:flex md:text-2xl flex font-semibold font-serif '>
               Cohorts
@@ -171,7 +162,6 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                   style={{display: 'flex', padding:'12px 12px 12px 19px', alignSelf: 'center', fontFamily: 'DM Sans', textTransform: 'none', color: '#142E70', fontSize: '14px', fontWeight: '700',
                     border: '1.5px solid #AAB7DB', borderRadius: '8px',
                   }} 
-                  // className='w-[100%] md:w-auto h-[48px] md:h-auto'
                 >More Actions</Button>
                 <Menu
                   id="long-menu"
@@ -179,7 +169,6 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                   anchorEl={anchorEl}
                   open={open}
                   onClose={handleClose}
-                  // PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: '22ch' }}}
                 >
                   {moreActions.map((option) => (
                     <MenuItem key={option.title} selected={option.title === 'Pyxis'} onClick={handleClose}>
@@ -219,7 +208,6 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
             </div>
         </Container>
 
-        {/* {!isMobile && ( */}
           <Container maxWidth={false} style={{ padding: '20px' }}>
             <div className='flex flex-col justify-start'>
           
@@ -228,9 +216,7 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                 let startDate: Date | null = null;
                 let formattedStartDateString: string = "";
               
-                // if (typeof item.startDate === 'string' && item.startDate.includes('-')) {
                 if (item.startDate) {
-                  // If startDate is a string and in the format "YYYY-MM-DD"
                   startDate = new Date(item.startDate);
                   formattedStartDateString = `${startDate.getDate()}${getDaySuffix(startDate.getDate())} ${getMonthAbbreviation(startDate.getMonth())} ${startDate.getFullYear()}`;
                 } else {
@@ -246,7 +232,6 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                 
                 return (
                   <Card key={item.id} style={{ marginBottom: '20px', padding: '10px', display: 'flex', border: '1px #F6FCFF', boxShadow: '0px 8px 16px 0px rgba(240, 249, 255, 0.5)', borderRadius: '8px' }}>
-                    {/* <Box sx={{ display: 'flex', flexDirection: 'column' }}> */}
                       <img src={simonLeeImage} alt="Simon Lee" className='w-20 md:w-12 h-20 md:h-12 rounded-lg'/>
                       <div className='flex flex-col md:flex-row w-[100%] justify-between'>
                         <div className='flex flex-col justify-center items-start px-4'>
@@ -273,7 +258,7 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                         onClose={handleClose}
                         PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: '22ch' } }}
                       >
-                        {moreActions.map((option) => (
+                        {action.map((option) => (
                           <MenuItem key={option.title} selected={option.title === 'Pyxis'} onClick={handleClose}>
                             {option.title}
                           </MenuItem>
@@ -281,31 +266,7 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                       </Menu>
                       </IconButton>
 
-                    {/* </Box> */}
                     </Card>
-                  // <Paper key={item.id} elevation={1} style={{ marginBottom: '20px', padding: '10px', display: 'flex', alignItems: 'center', boxShadow: '1px'}}>
-                  //   <div style={{ flex: 1 }} className='flex'>
-                  //     <div>
-                  //       <img src={simonLeeImage} alt="Simon Lee" className='w-12'/>
-                  //     </div>
-                  //     <div className='flex flex-col justify-center items-start px-4'>
-                  //       <Typography className='flex text-base text-gray-900'>{item.cohortName}</Typography>
-                  //       <div className='flex gap-6 '>
-                  //         <Typography className='flex text-xs'>{item.program}</Typography>  
-                  //         <div className='flex text-center items-center gap-2'>
-                  //           <PersonOutlineOutlinedIcon style={{color: '#9CABB5', width: '12px' }}/> 
-                  //           <p className='text-gray-600 text-xs'>25 Learners</p>  
-                  //         </div>
-                  //       </div>
-                  //     </div>
-                  //     <div style={{ marginLeft: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> {/* Adjusted here */}
-                  //       <Typography style={{ textAlign: 'center', fontSize: 14, color: '#4F4F4F' }}>Created {formattedStartDateString}</Typography>
-                  //     </div>
-                  //   </div>
-                  //   <IconButton aria-label="more">
-                  //     <MoreVertIcon />
-                  //   </IconButton>
-                  // </Paper>
                 );
               })}
             </div> 
@@ -319,157 +280,11 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
     { title: 'Cohort 1' },
     { title: 'Cohort 2' },
     { title: 'Cohort 3' },
-    { title: 'Cohort 4' },
-    { title: 'Cohort 5' },
-    { title: 'Cohort 6' },
-    { title: 'Cohort 7' },
-    { title: 'Cohort 8' },
-    { title: 'Cohort 9' },
-    { title: 'Cohort 10' },
-
+    
   ]
   
 export default InstructorCohort;
 
 
 
-  {/* {viewCohorts.map((item: Cohort, index: number) => {
-              let startDate: Date | null = null;
-              let formattedStartDateString: string = "";
-            
-              if (typeof item.startDate === 'string' && item.startDate.includes('-')) {
-                // If startDate is a string and in the format "YYYY-MM-DD"
-                startDate = new Date(item.startDate);
-                formattedStartDateString = `${startDate.getDate()}${getDaySuffix(startDate.getDate())} ${getMonthAbbreviation(startDate.getMonth())} ${startDate.getFullYear()}`;
-              } else if (item.startDate instanceof Date) {
-                startDate = item.startDate;
-                formattedStartDateString = `${startDate.getDate()}${getDaySuffix(startDate.getDate())} ${getMonthAbbreviation(startDate.getMonth())} ${startDate.getFullYear()}`;
-              } else {
-                console.error("Invalid startDate:", item.startDate);
-              }
-            
-              if (!startDate) {
-                console.error("Invalid startDate:", item.startDate);
-              }
-            
-              console.log("Parsed start date:", startDate);
-              console.log("Formatted start date:", formattedStartDateString);     */}
-
-            {/* {viewCohorts.map((item: Cohort, index: number) => {
-              let startDate: Date | null = null;
-              let formattedStartDateString: string = "";
-
-              if (typeof item.startDate === 'string' && item.startDate.includes('-')) {
-                // If startDate is a string and in the format "YYYY-MM-DD"
-                startDate = new Date(item.startDate);
-                formattedStartDateString = `${startDate.getDate()}${getDaySuffix(startDate.getDate())} ${getMonthAbbreviation(startDate.getMonth())} ${startDate.getFullYear()}`;
-              } else if (item.startDate instanceof Date) {
-                startDate = item.startDate;
-                formattedStartDateString = `${startDate.getDate()}${getDaySuffix(startDate.getDate())} ${getMonthAbbreviation(startDate.getMonth())} ${startDate.getFullYear()}`;
-              } else {
-                console.error("Invalid startDate:", item.startDate);
-              }
-
-              if (!startDate) {
-                console.error("Invalid startDate:", item.startDate);
-              }
-
-              console.log("Parsed start date:", startDate);
-              console.log("Formatted start date:", formattedStartDateString); */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // useEffect(() => {
-    // dispatch(getViewCohorts() as any);
-  // },[]);
-
-  // if (isLoading) {
-  //   return (
-  //     <div>
-  //       <h1>Loading...</h1>
-  //     </div>
-  //   );
-  // }
-
-
-   {/* {value >= 1 && (
-          <section className='cart'>
-            <header>
-              <h2>Classes</h2>
-            </header>
-            <div className='flex flex-col justify-start'>
-              {viewCohorts && viewCohorts.map((item: Cohort, index: number) => (
-                <Paper key={item.id} elevation={3} style={{ marginBottom: '20px', padding: '10px', display: 'flex', alignItems: 'center'}}>
-                  <div style={{ flex: 1 }}> */}
-                    {/* <InstructorItem {...item} /> */}
-                  {/* </div>
-                  <IconButton aria-label="more">
-                    <MoreVertIcon />
-                    </IconButton>
-                // </Paper>
-              ))}
-            </div>
-          </section>
-        )} */}
-        
-
-        {/* <div className='flex flex-col justify-start'>
-          {viewCohorts.map((item: Cohort, index: number) => (
-            
-            <Paper key={item.id} elevation={3} style={{ marginBottom: '20px', padding: '10px', display: 'flex', alignItems: 'center'}}>
-              <div style={{ flex: 1 }} className='flex'>
-                <div>
-                  <img src={simonLeeImage} alt="Simon Lee" className='w-20'/>
-                </div>
-                <div>
-                <Typography variant="h6">{item.cohortName}</Typography>
-                <Typography>{item.description}</Typography>
-                <Typography>Program: {item.program.programName}</Typography>
-                </div>
-                <div>
-                  <Typography>Created {item.startDate.toString()}</Typography>
-                
-                </div>
-
-                {/* Render additional information here */}
-                {/* Render content here */}
-              {/* </div>
-               <IconButton aria-label="more">
-                <MoreVertIcon />
-              </IconButton>
-            </Paper>  */}
-          {/* ))} */}
-        {/* </div>  */}
-
-
-
-
-          {/* <Autocomplete
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="Search"
-                    variant="outlined"
-                    InputProps={{
-                      // ...params.InputProps,
-                      // startAdornment: (
-                        <InputAdornment position="start">
-                          <SearchIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                )}
-              /> */}
+ 
