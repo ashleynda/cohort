@@ -3,16 +3,13 @@ import { Box, Button, Typography, useTheme } from '@mui/material'
 import unsplash from '../../assets/unsplash.png'
 import company from '../../assets/company-logo.png'
 import EastIcon from '@mui/icons-material/East';
-import Sidebar from '../../components/sidebar/Sidebar'
-import Cohorts from './Cohorts'
-import Footer from '../../components/footer/Footer'
 import { Outlet } from 'react-router-dom';
 
 const Hero = () => {
     const theme = useTheme();
 
     return (
-    <div>
+    <div >
         <Box sx={{ flexGrow: 1}}>
 
             <img src={unsplash} alt='tree-leaves' className='absolute md:relative md:w-full mt-2 z-0 height h-32 md:h-auto' />
@@ -24,7 +21,7 @@ const Hero = () => {
                 </div>
                 <Button variant='contained' sx={{color: '#1E323F', textTransform: 'none', backgroundColor: 'white', 
                     gap: '2px', fontSize: '16px', textAlign: 'center', marginRight: '52px', marginTop: '10px', fontWeight: 700,  '&:hover': {
-                        backgroundColor: 'white', // Remove hover effect
+                        backgroundColor: 'white', 
                       },}}>
                     View Profile <EastIcon />  
                 </Button>
@@ -34,9 +31,9 @@ const Hero = () => {
         <Box  
             sx={{
                 display: 'flex',
-                flexDirection: 'column', // Stack components vertically on small screens
+                flexDirection: 'column',
                 [theme.breakpoints.up('sm')]: {
-                flexDirection: 'row', // Align components horizontally on screens larger than small
+                flexDirection: 'row', 
                 },
             }}
         >

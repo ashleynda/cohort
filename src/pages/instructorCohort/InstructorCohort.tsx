@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, TextField, InputAdornment, Button, IconButton, MenuItem, Menu, Paper, useTheme, Typography, useMediaQuery, Card, Box } from '@mui/material';
+import { Container, TextField, InputAdornment, Button, IconButton, MenuItem, Menu, useTheme, Typography, useMediaQuery, Card, Box } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -16,12 +16,12 @@ import { createCohort } from '../../features/cohort/CohortSlice';
 
 const ITEM_HEIGHT = 48;
 
-const action = [
-  {title: 'Delete'},
-  { title: 'Schedule an event' },
-  { title: 'Make an announcement' },
+// const action = [
+//   {title: 'Delete'},
+//   { title: 'Schedule an event' },
+//   { title: 'Make an announcement' },
 
-]
+// ]
 
 const moreActions = [
   { title: 'Publish a poll' },
@@ -42,7 +42,6 @@ interface Cohort {
   program: Program[];
   startDate: string;
   endDate: string;
-  // Add other properties as needed
 }
 interface CreateCohortProps {
   onFileUpload: (file: File) => void;
@@ -67,13 +66,7 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
     files: [],
   });
 
-  const mobileStyle = {
-    width: '100px', 
-  };
-
-
-
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
     setInputValue(newValue);
   };
@@ -207,11 +200,10 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
             </div>
             </div>
         </Container>
-
+                
+        <Box sx={{overflowY: 'auto', height: 500}}>
           <Container maxWidth={false} style={{ padding: '20px' }}>
-            <div className='flex flex-col justify-start'>
-          
-
+            <div className='flex flex-col justify-start'>         
               {viewCohorts?.filter((item:Cohort ) => inputValue === '' ? item : item.cohortName.toLowerCase().includes(inputValue.toLowerCase())).map((item: Cohort, index: number) => {
                 let startDate: Date | null = null;
                 let formattedStartDateString: string = "";
@@ -231,7 +223,7 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                 console.log("Formatted start date:", formattedStartDateString);
                 
                 return (
-                  <Card key={item.id} style={{ marginBottom: '20px', padding: '10px', display: 'flex', border: '1px #F6FCFF', boxShadow: '0px 8px 16px 0px rgba(240, 249, 255, 0.5)', borderRadius: '8px' }}>
+                  <Card key={item.id} style={{ marginBottom: '20px', padding: '10px', display: 'flex', border: '1px #F6FCFF', boxShadow: '0px 8px 16px 0px rgba(240, 249, 255, 0.5)', borderRadius: '8px' }}  >   
                       <img src={simonLeeImage} alt="Simon Lee" className='w-20 md:w-12 h-20 md:h-12 rounded-lg'/>
                       <div className='flex flex-col md:flex-row w-[100%] justify-between'>
                         <div className='flex flex-col justify-center items-start px-4'>
@@ -250,29 +242,16 @@ const InstructorCohort: React.FC<CreateCohortProps> = ({ onFileUpload, onFileCle
                       </div>
                       <IconButton aria-label="more" className='flex h-fit md:h-auto '>
                        <MoreVertIcon className= 'h-fit'/>
-                       <Menu
-                        id="long-menu"
-                        MenuListProps={{ 'aria-labelledby': 'long-button' }}
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        PaperProps={{ style: { maxHeight: ITEM_HEIGHT * 4.5, width: '22ch' } }}
-                      >
-                        {action.map((option) => (
-                          <MenuItem key={option.title} selected={option.title === 'Pyxis'} onClick={handleClose}>
-                            {option.title}
-                          </MenuItem>
-                        ))}
-                      </Menu>
                       </IconButton>
 
                     </Card>
+                    
                 );
               })}
             </div> 
           </Container>
+          </Box>
           
-        {/* )}      */}
       </div>
     );
   }; 

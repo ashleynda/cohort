@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ViewAllCohortUrl } from "../../urls/UrlsApi";
 import viewCohorts from "../../viewCohorts";
 
 interface Program {
@@ -14,42 +13,9 @@ interface Cohort {
   description: string;
   program: Program;
   startDate: string;
-  // Add other properties as needed
 }
 
-  // const cohortData = [
-//   {
-//     cohortName: '',
-//     description: '',
-//     program: '',
-//     startDate: null,
-//     endDate: null,
-//     files: [],
-//     cohortCount: 0,
-//   },
-//   {
-//     cohortName: '',
-//     description: '',
-//     program: '',
-//     startDate: null,
-//     endDate: null,
-//     files: [],
-//     cohortCount: 0,
-//   },
-//   {
-//     cohortName: '',
-//     description: '',
-//     program: '',
-//     startDate: null,
-//     endDate: null,
-//     files: [],
-//     cohortCount: 0,
-//   },
-// ];
-
-// const initialState = {cohortData}
-
-interface ViewState {
+ interface ViewState {
   viewCohorts: Cohort[];
   value: number;
   isLoading: boolean;
@@ -67,7 +33,7 @@ const viewSlice = createSlice({
     name: 'view',
     initialState,
     reducers: {
-      addCohort(state, action: PayloadAction<Cohort>) {
+      addCohort(state, action: PayloadAction<{ cohortName: string; program: string; startDate: string; }>) {
         state.viewCohorts.push(action.payload);
       }
     },

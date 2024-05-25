@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { FormControl, FormLabel, MenuItem, Select, SelectChangeEvent, TextareaAutosize, TextField } from '@mui/material';
+import { FormControl, FormLabel, IconButton, MenuItem, Select, SelectChangeEvent, TextareaAutosize, TextField } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -60,9 +60,7 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
   const [endDateError, setEndDateError] = useState("");
 
   const navigation = useNavigate();
-  // const onCreateCohort = () => {
-  //   dispatch(createCohort(formData));
-  // };
+ 
   
 
   const handleLocalFileUpload = (file: File) => {
@@ -115,52 +113,16 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
       formData.description?.trim() !== '' &&
       formData.program?.trim() !== '' &&
       formData.startDate &&
-      formData.endDate &&
-      formData.files.length > 0
+      formData.endDate 
     );
   };
-
-  // const handleStartDateChange = (date: Date) => { 
-  //   dispatch(updateStartDate(new Date(date)));
-  //   console.log("FormData after start date change:", { ...formData, startDate: new Date(date) });
-  // };
-
-  // const handleStartDateChange = (date: Dayjs | null, _context: PickerChangeHandlerContext<DateValidationError>) => { 
-  //   if (date !== null) {
-  //     const dateAsDate = date.toDate();
-  //     dispatch(updateStartDate(dateAsDate));
-  //     console.log("FormData after start date change:", { ...formData, startDate: dateAsDate });
-  //   } else {
-    
-  //     dispatch(updateStartDate(null));
-  //     console.log("FormData after start date change:", { ...formData, startDate: null });
-  //   }
-  // };
-  
-
-  // const handleEndDateChange = (date: Date) => { 
-  //   dispatch(updateEndDate(new Date(date)));
-  //   console.log("FormData after end date change:", { ...formData, endDate: new Date(date) });
-  // };
-
-  // const handleEndDateChange = (date: Dayjs | null, _context: PickerChangeHandlerContext) => { 
-  //   // Check if date is not null
-  //   if (date !== null) {
-  //     const dateAsDate = date.toDate();
-  //     dispatch(updateEndDate(dateAsDate));
-  //     console.log("FormData after end date change:", { ...formData, endDate: dateAsDate });
-  //   } else {
-     
-  //     dispatch(updateEndDate(null));
-  //     console.log("FormData after end date change:", { ...formData, endDate: null });
-  //   }
-  // };
+  // formData.files.length > 0
 
   const handleStartDateChange = (date: Dayjs | null) => { 
     if (date !== null) {
       const dateAsDate = date.toDate();
       dispatch(updateStartDate(dateAsDate));
-      setStartDate(date);
+      setStartDate(dateAsDate); 
       if (endDate && date.isAfter(endDate)) {
         setEndDate(null);
         dispatch(updateEndDate(null));
@@ -181,7 +143,7 @@ export default function CreateCohort({ onFileUpload, onFileClear, onCreateCohort
       } else {
         const dateAsDate = date.toDate();
         dispatch(updateEndDate(dateAsDate));
-        setEndDate(date);
+        setEndDate(dateAsDate);
         setEndDateError("");
       }
     } else {

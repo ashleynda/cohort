@@ -6,6 +6,13 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ham from "../../assets/hamburger.png"
 import { useNavigate } from 'react-router-dom';
 import MobileNav from './MobileNav';
+import { Link } from "react-router-dom";
+
+  const pages = [
+    { name: 'Home', path: '/home' },
+    { name: 'Workspace', path: '/workspace' },
+    { name: 'Rsources Library', path: '/resources' }
+  ];
 
 const Nav = () => {
   const [activeButton, setActiveButton] = useState(0);
@@ -47,7 +54,7 @@ const Nav = () => {
   };
 
   return (    
-    <AppBar position='static' color='default' >
+    <AppBar position='static' color='default'  >
       <Toolbar style={{display: 'flex', justifyContent: 'space-between'}}>
         <img src={logo} alt='comany-logo' className='flex md:flex'/>
         <Typography variant='h6' sx={{
@@ -62,67 +69,31 @@ const Nav = () => {
         >
           enum
         </Typography>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center', mr: 2, gap: 8}}> 
-          <Button
-            variant="text" 
-            sx={{ 
-              color: activeButton === 0 ? '#008EEF' : 'black', 
-              borderBottom: activeButton === 0 ? '4px solid #008EEF' : 'none',
-              textTransform: 'none',
-              '&:hover': {                 
-                color: '#008EEF'
-              },
-              fontSize: 16,
-              fontWeight: 600,
-              lineHeight: '27px', 
-              borderRadius: 1,
-              fontFamily: 'DM Sans'
-            }}
-              onClick={() => handleClick(0)}  
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center', mr: 2, gap: 8 }}>
+          {pages.map((page, index) => (
+            <Button
+              key={page.name}
+              component={Link}
+              to={page.path}
+              sx={{ 
+                color: activeButton === index ? '#008EEF' : 'black', 
+                borderBottom: activeButton === index ? '4px solid #008EEF' : 'none',
+                textTransform: 'none',
+                '&:hover': {                 
+                  color: '#008EEF'
+                },
+                fontSize: 16,
+                fontWeight: 600,
+                lineHeight: '27px', 
+                borderRadius: 1,
+                fontFamily: 'DM Sans'
+              }}
+              onClick={() => handleClick(index)}
               className="text-base font-bold"
             >
-            Home
-          </Button>
-
-          <Button 
-            variant="text" 
-            sx={{ 
-              color: activeButton === 1 ? '#008EEF' : 'black', 
-              borderBottom: activeButton === 1 ? '4px solid #008EEF' : 'none',
-              textTransform: 'none',
-              '&:hover': { 
-                color: '#008EEF'
-              },
-              fontSize: 16,
-              fontWeight: 600,
-              lineHeight: '27px',
-              fontFamily: 'DM Sans' 
-            }}
-              onClick={() => handleClick(1)}  
-              className="text-base font-bold"
-          >
-            Workspace
-          </Button> 
-            
-          <Button 
-            variant="text" 
-            sx={{ 
-              color: activeButton === 2 ? '#008EEF' : 'black', 
-              borderBottom: activeButton === 2 ? '4px solid #008EEF' : 'none',
-              textTransform: 'none',
-              '&:hover': { 
-              color: '#008EEF'
-              },
-              fontSize: 16,
-              fontWeight: 600,
-              lineHeight: '27px',
-              fontFamily: 'DM Sans'
-            }}
-              onClick={() => handleClick(2)}  
-              className="text-base font-bold"
-            >
-              Resources Library
-          </Button>
+              {page.name}    
+            </Button>
+          ))}      
         </Box>
 
           <div className='flex md:flex md:flex-row gap-6'>
@@ -138,7 +109,7 @@ const Nav = () => {
               sx={{ 
               display: { xs: 'none', md: 'flex' },
               textTransform: 'none',
-              color: 'black' // Set the color to black
+              color: 'black' 
               }}
               endIcon={<ExpandMoreIcon/>}
             >
@@ -157,7 +128,7 @@ const Nav = () => {
               <div style={{ display: { xs: 'none', md: 'block' } as any }}  >
                 { isMobile || <img src={ham} alt="hamburger" />}
               </div>
-          </div>          
+          </div>       
           
 
       </Toolbar>
@@ -166,6 +137,68 @@ const Nav = () => {
 }
 
 export default Nav
+
+
+{/* <Button
+variant="text" 
+sx={{ 
+  color: activeButton === 0 ? '#008EEF' : 'black', 
+  borderBottom: activeButton === 0 ? '4px solid #008EEF' : 'none',
+  textTransform: 'none',
+  '&:hover': {                 
+    color: '#008EEF'
+  },
+  fontSize: 16,
+  fontWeight: 600,
+  lineHeight: '27px', 
+  borderRadius: 1,
+  fontFamily: 'DM Sans'
+}}
+  onClick={() => handleClick(0)}  
+  className="text-base font-bold"
+>
+Home
+</Button>
+
+<Button 
+variant="text" 
+sx={{ 
+  color: activeButton === 1 ? '#008EEF' : 'black', 
+  borderBottom: activeButton === 1 ? '4px solid #008EEF' : 'none',
+  textTransform: 'none',
+  '&:hover': { 
+    color: '#008EEF'
+  },
+  fontSize: 16,
+  fontWeight: 600,
+  lineHeight: '27px',
+  fontFamily: 'DM Sans' 
+}}
+  onClick={() => handleClick(1)}  
+  className="text-base font-bold"
+>
+Workspace
+</Button> 
+
+<Button 
+variant="text" 
+sx={{ 
+  color: activeButton === 2 ? '#008EEF' : 'black', 
+  borderBottom: activeButton === 2 ? '4px solid #008EEF' : 'none',
+  textTransform: 'none',
+  '&:hover': { 
+  color: '#008EEF'
+  },
+  fontSize: 16,
+  fontWeight: 600,
+  lineHeight: '27px',
+  fontFamily: 'DM Sans'
+}}
+  onClick={() => handleClick(2)}  
+  className="text-base font-bold"
+>
+  Resources Library
+</Button> */}
 
 
 
